@@ -9,3 +9,5 @@ ltcgen
 jltcntp
 jltctrigger
 *.swp
+.kdev4/
+tricora-ltc-tools.kdev4

@@ -116,7 +116,11 @@ int ltcdump(char *filename, int fps_num, int fps_den, int channel) {
 	LTCFrameExt frame;
 	int print_missing_frame_info;
 
-	m_sndfile = sf_open(filename, SFM_READ, &sfinfo);
+    if (strcmp(filename, "-") == 0) {
+        m_sndfile = sf_open_fd(fileno (stdin), SFM_READ, &sfinfo, SF_TRUE);
+    } else {
+        m_sndfile = sf_open(filename, SFM_READ, &sfinfo);
+    }
 
 	if (SF_ERR_NO_ERROR != sf_error( m_sndfile)) {
 		fprintf(stderr, "Error: This is not a sndfile supported audio file format\n");
